@@ -97,6 +97,15 @@ namespace UnityGLTF
 			public TextureMapType textureMapType;
 		}
 
+		public Transform RootTransform
+		{
+			get
+			{
+				if (_rootTransforms != null && _rootTransforms.Length > 0) return this._rootTransforms[0];
+				return null;
+			}
+		}
+
 		private Transform[] _rootTransforms;
 		private GLTFRoot _root;
 		private BufferId _bufferId;
