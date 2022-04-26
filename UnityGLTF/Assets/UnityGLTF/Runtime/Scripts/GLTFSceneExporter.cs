@@ -657,7 +657,7 @@ namespace UnityGLTF
 			exportTexture.Apply();
 
 			// TODO refactor texture export path so that choosing the right extension is more sane
-			var textureHasAlpha = false;
+			var textureHasAlpha = IsPng(texture.name);
 			var imageData = textureHasAlpha ? exportTexture.EncodeToPNG() : exportTexture.EncodeToJPG(90);
 			var extension = textureHasAlpha ? "png" : "jpg";
 
@@ -2464,7 +2464,6 @@ namespace UnityGLTF
 
 			bool wasAbleToExportFromDisk = false;
 			bool textureHasAlpha = true;
-
 			if(TryExportTexturesFromDisk && TryGetTextureDataFromDisk(textureMapType, texture, out string path, out byte[] imageBytes))
 			{
 				if(IsPng(path))

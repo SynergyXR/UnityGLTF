@@ -763,6 +763,11 @@ namespace UnityGLTF
 				case "image/jpeg":
 					//	NOTE: the second parameter of LoadImage() marks non-readable, but we can't mark it until after we call Apply()
 					texture.LoadImage(data, markGpuOnly);
+                    var textureName = texture.name.ToUpper();
+                    if (!(textureName.EndsWith("PNG") || textureName.EndsWith("JPG") || textureName.EndsWith("JPEG")))
+                    {
+                        texture.name += image.MimeType == "image/png" ? ".png" : ".jpg";
+                    }
 					break;
 				case "image/ktx2":
 #if HAVE_KTX
@@ -2376,7 +2381,7 @@ namespace UnityGLTF
 				else
 				{
 					var unityTexture = Object.Instantiate(source);
-					unityTexture.name = string.IsNullOrEmpty(image.Name) ? Path.GetFileNameWithoutExtension(image.Uri) : image.Name;
+					unityTexture.name = source.name;
 					unityTexture.filterMode = desiredFilterMode;
 					unityTexture.wrapModeU = desiredWrapModeS;
 					unityTexture.wrapModeV = desiredWrapModeT;
