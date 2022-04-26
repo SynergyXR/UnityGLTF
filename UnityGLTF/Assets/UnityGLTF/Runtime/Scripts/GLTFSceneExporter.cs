@@ -744,11 +744,10 @@ namespace UnityGLTF
 			}
 			var file = new FileInfo(filenamePath);
 			file.Directory.Create();
-			if(!string.IsNullOrEmpty(enforceExtension)) {
-				Path.ChangeExtension(filenamePath, enforceExtension);
-				if (enforceExtension.StartsWith(".") && !filenamePath.EndsWith(enforceExtension))
-					filenamePath += enforceExtension;
-				else if (!enforceExtension.StartsWith(".") && !filenamePath.EndsWith(enforceExtension))
+			if(!string.IsNullOrEmpty(enforceExtension))
+			{
+				var upperCasePath = filenamePath.ToUpper();
+				if(!(upperCasePath.EndsWith(".JPG") || upperCasePath.EndsWith(".JPEG") || upperCasePath.EndsWith(".PNG")))
 					filenamePath += "." + enforceExtension;
 			}
 			return filenamePath;

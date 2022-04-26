@@ -797,6 +797,8 @@ namespace UnityGLTF
 		{
 			Texture2D texture = new Texture2D(0, 0, TextureFormat.RGBA32, GenerateMipMapsForTextures, isLinear);
 			texture.name = string.IsNullOrEmpty(image.Name) ? Path.GetFileNameWithoutExtension(image.Uri) : image.Name;
+			if (string.IsNullOrEmpty(texture.name))
+				texture.name = Guid.NewGuid().ToString();
 
 			if (stream is MemoryStream)
 			{
